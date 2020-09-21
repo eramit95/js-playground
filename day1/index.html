@@ -81,9 +81,10 @@
       const key = _event.target.closest('.key');
 
       if (!key || _event.propertyName !== 'transform') {
+
         return;
       }
-      console.log(_event);
+      
       key.classList.remove('playing');
     });
   </script>
