@@ -63,15 +63,29 @@
 
     window.addEventListener('keyup', (_event) => {
       const audio = document.querySelector(`audio[data-key="${_event.keyCode}"]`);
+      const key = document.querySelector(`div[data-key="${_event.keyCode}"]`); 
 
       if (!audio) {
 
         return;
       }
+      audio.currentTime = 0;
+      audio.play();
 
-      console.log(audio)
+      key.classList.remove('playing'); // Removing the class inorder to avoid it adding multiple times
+      key.classList.add ('playing');
     });
 
+    // Using event deligation to attach the even listener
+    document.querySelector('.keys').addEventListener('transitionend', (_event) => {
+      const key = _event.target.closest('.key');
+
+      if (!key || _event.propertyName !== 'transform') {
+        return;
+      }
+      console.log(_event);
+      key.classList.remove('playing');
+    });
   </script>
 
 
